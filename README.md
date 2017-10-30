@@ -1,5 +1,5 @@
 # Telem-A-Gator
-The Telem-A-Gator is python-based GUI to view and analyze scientific telemetry data.
+The Telem-A-Gator is python-based GUI to view and analyze scientific telemetry data. The goal of this software is to facilitate _exploratory data analysis_ rather than create publication figures. Any graph displayed in this software can be exported as PNG, JPG, and HTML files, and its content (the data creating it) can be exported as an excel file.
 
 ### Concepts
 * The telemetry software outputs data in the form of massive text files (CSV format with .txt extension). Sample output is below.
@@ -11,18 +11,35 @@ The Telem-A-Gator is python-based GUI to view and analyze scientific telemetry d
     * `FEATURE` = the type of data it contains (pulled from heater)
     * `EPOCH` = the date of the first line of data in the file ([epoch time](https://en.wikipedia.org/wiki/Epoch_(reference_date)))
     * `even` = ? I can't remember. Evenly spaced data maybe?
+* This software uses _schemes_ to define an experiment.
+  * A scheme is like "compare the [systolic pressure and heart rate] of animals [A, B, C] against animals [D, E, F] over dates [startDate - endDate] subtracting-out a baseline date range [startDate - endDate] and shuffle the data into [15 minute] bins and report error as [standard deviation].
+  * A scheme can be saved (or loaded) as an INI file.
+  * An example is [scheme_default.ini](src/scheme_default.ini)
+  * A scheme can be saved, then loaded and re-run at a later date. This is useful when new data becomes available (the only element that changes is the date range)
+  * Perhaps the most useful "feature" of this software is the ability to rapidly include/exclude animals from groups.
 
 ### Installation
-_This was verified to work on a Windows 10 machine on 2017-10-30_
-* WARNING: WinPython-64bit-2.7.10.3 will _not_ work. Python 3 will not work.
-* Extract WinPython locally in a folder you have full access to
-  * I recommend a folder in your user's Documents folder because you have unrestricted access to its contents.
+_NOTE: It was a MASSIVE undertaking to get this software running again several years later. The basic reason is that WinPython does not ship with PyQt, and to use the old version no newer versions can be installed on the system. Traditionally this was done with PythonXY, but that software is no longer available online. I got it working with WinPython, but its different version of numpy required code changes. It works now (2017-10-30) on a Windows 10 machine so follow these instructions carefully. There is almost no flexibility for other versions of Python or supporting libraries._
+
+* install [WinPython-64bit-2.7.12.4Zero](https://sourceforge.net/projects/winpython/files/WinPython_2.7/2.7.12.4/) locally
+  * It helps to have full file access to the install path. I recommend installing it in Documents.
+  * `C:\Users\swharden\Documents\important\WinPython-64bit-2.7.12.4Zero` (for me)
   * You do not have to set the user or system environment variables to add python.exe to the system path.
-* Create a batch script to launch it. 
-  * It's just `"C:\path\to\python.exe" "C:\path\to\TELEM-A-GATOR.py"`
-  * This can be made an icon on the desktop
+* install [PyQt4-4.11.4-gpl-Py2.7-Qt4.8.7-x64.exe](https://sourceforge.net/projects/pyqt/files/PyQt4/PyQt-4.11.4/) into the WinPython sub-folder containing python.exe
+  * During the installation screen it asks to locate Python's installation folder. 
+    * Give it the the full path to python.exe. This will be similar to the path above, but one folder deeper
+    * `C:\Users\swharden\Documents\important\WinPython-64bit-2.7.12.4Zero\python-2.7.12.amd64` (for me)
+* Install additional libraries
+  * open `WinPython Command Prompt.exe` (in the WinPython folder)
+  * `python -m pip install --upgrade pip` (to upgrade pip)
+  * `pip install numpy` (to install [numpy](http://www.numpy.org))
+  * `pip install matplotlib` (to install [matplotlib](http://matplotlib.org))
+* Create a batch script to launch the telem-a-gator
+  * The easiest thing to do is just edit [src/LAUNCH.cmd](src/LAUNCH.cmd) on your own computer.
+  * Then just `"C:\path\to\python.exe" TELEM-A-GATOR.py`
   * Add `pause` to the end of the script to prevent it from closing if it crashes.
-  
+  * This can be made an icon on the desktop (make a shortcut to the batch script, not another batch script)
+    
 ### Example Use
 _Run through this set of steps to demonstrate how this software runs_
 * ***Data Conversion:*** Data has to be converted from TXT files to NPY files.
@@ -30,10 +47,12 @@ _Run through this set of steps to demonstrate how this software runs_
   * I like to make my output folder the same as my input folder.
   * Click convert, and hundreds of smaller NPY files will be created.
 * ***Experiment Design:***
-  * crashes currently...
+  * If no animals show up, go back to the data conversion screen and set the data folder
+  * Design your experiment here. TODO: document what all the boxes do.
 
 ### Miscellaneous
 * **Licensing:** At one point long ago there was talk about providing Telem-A-Gator with CJFLab software (which Dr. Frazier wrote and distributes as pay-for software with a licensing system to protect it). I included licensing support inside Telem-A-Gator but it is not activated and can be effectively ignored for now. Licensing a collection of plain text python scripts is a weird concept to me. I think the plan was to have this program run as a combination of Python and C such that the licensing system would use that already available in C.
+* **matplotlibwidget error** (if occurs) can be prevented by placing matplotlibwidget.py in to WinPython's ./lib/site-packages/ folder. Alternatively just make sure that file is in the same folder you are launching python from (i.e., the folder with the batch script).
 
 ### Telemetry File Format
 * Example data is in [/data/](/data/)
