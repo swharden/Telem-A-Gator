@@ -37,9 +37,9 @@ _NOTE: It was a MASSIVE undertaking to get this software running again several y
 * Create a batch script to launch the telem-a-gator
   * The easiest thing to do is just edit [src/LAUNCH.cmd](src/LAUNCH.cmd) on your own computer.
   * Then just `"C:\path\to\python.exe" TELEM-A-GATOR.py`
-  * This can be made an icon on the desktop
   * Add `pause` to the end of the script to prevent it from closing if it crashes.
-  
+  * This can be made an icon on the desktop (make a shortcut to the batch script, not another batch script)
+    
 ### Example Use
 _Run through this set of steps to demonstrate how this software runs_
 * ***Data Conversion:*** Data has to be converted from TXT files to NPY files.
