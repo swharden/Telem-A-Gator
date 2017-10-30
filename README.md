@@ -1,5 +1,5 @@
 # Telem-A-Gator
-The Telem-A-Gator is python-based GUI to view and analyze scientific telemetry data.
+The Telem-A-Gator is python-based GUI to view and analyze scientific telemetry data. The goal of this software is to facilitate _exploratory data analysis_ rather than create publication figures. Any graph displayed in this software can be exported as PNG, JPG, and HTML files, and its content (the data creating it) can be exported as an excel file.
 
 ### Concepts
 * The telemetry software outputs data in the form of massive text files (CSV format with .txt extension). Sample output is below.
@@ -11,6 +11,12 @@ The Telem-A-Gator is python-based GUI to view and analyze scientific telemetry d
     * `FEATURE` = the type of data it contains (pulled from heater)
     * `EPOCH` = the date of the first line of data in the file ([epoch time](https://en.wikipedia.org/wiki/Epoch_(reference_date)))
     * `even` = ? I can't remember. Evenly spaced data maybe?
+* This software uses _schemes_ to define an experiment.
+  * A scheme is like "compare the [systolic pressure and heart rate] of animals [A, B, C] against animals [D, E, F] over dates [startDate - endDate] subtracting-out a baseline date range [startDate - endDate] and shuffle the data into [15 minute] bins and report error as [standard deviation].
+  * A scheme can be saved (or loaded) as an INI file.
+  * An example is [scheme_default.ini](src/scheme_default.ini)
+  * A scheme can be saved, then loaded and re-run at a later date. This is useful when new data becomes available (the only element that changes is the date range)
+  * Perhaps the most useful "feature" of this software is the ability to rapidly include/exclude animals from groups.
 
 ### Installation
 _NOTE: It was a MASSIVE undertaking to get this software running again several years later. The basic reason is that WinPython does not ship with PyQt, and to use the old version no newer versions can be installed on the system. Traditionally this was done with PythonXY, but that software is no longer available online. I got it working with WinPython, but its different version of numpy required code changes. It works now (2017-10-30) on a Windows 10 machine so follow these instructions carefully. There is almost no flexibility for other versions of Python or supporting libraries._
@@ -29,10 +35,10 @@ _NOTE: It was a MASSIVE undertaking to get this software running again several y
   * `pip install numpy` (to install [numpy](http://www.numpy.org))
   * `pip install matplotlib` (to install [matplotlib](http://matplotlib.org))
 * Create a batch script to launch the telem-a-gator
-  * It's just `"C:\path\to\python.exe" "C:\path\to\TELEM-A-GATOR.py"`
+  * The easiest thing to do is just edit [src/LAUNCH.cmd](src/LAUNCH.cmd) on your own computer.
+  * Then just `"C:\path\to\python.exe" TELEM-A-GATOR.py`
   * This can be made an icon on the desktop
   * Add `pause` to the end of the script to prevent it from closing if it crashes.
-  * Check out my [launch script](src/LAUNCH.cmd)
   
 ### Example Use
 _Run through this set of steps to demonstrate how this software runs_
