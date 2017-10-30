@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<head>
+<style>
+
+
+body{
+	font-family:Arial,Helvetica,sans-serif;
+	font-size:12px;
+	background: #FFF;
+	}
+
+.title{
+	font-size:32px; 
+	font-weight: bold; 
+}
+.subtitle{
+	font-style: italic;
+	position: relative;
+	top:-8px;
+	left: 14px;
+}
+
+h2 {text-decoration: underline;}
+code {font-size:14px;}
+
+</style>
+</head>
+
+<body>
+
+<span class="title">Telem-A-Gator<br></span>
+<span class="subtitle">by Scott W Harden</span><br><br>
+
+<code>
+<table>
+	<tr>
+		<td align="right">Licenced to:</td>
+		<td>Eric G Krause</td>
+	</tr>
+	<tr>
+		<td align="right">License Type:</td>
+		<td>unlimited</td>
+	</tr>
+	<tr>
+		<td align="right">Key:</td>
+		<td>7d9ey-qf76f-24f2a-64v5c</td>
+	</tr>
+</table>
+</code>
+
+<h2>Change Log</h2>
+<dl>
+	<dt><b>2013-05-14</b></dt>
+		<dd>- missing individual data points no longer result in missing averaged data points
+		<dd>- loading new scheme now correctly repopulates "sweeps" checkbox
+		<dd>- baseline/experiment dates are recalculated when 'display data summary' is pressed
+		<br><br>
+	<dt><b>2013-05-02</b></dt>
+		<dd>- modified image and excel output to automatically save scheme in same folder
+		<dd>- changelog dynamically loaded from local HTML file
+		<br><br>
+	<dt><b>2013-05-01</b></dt>
+		<dd>- corrected normalization error bars so stdev=(stdev^2+stdev^2)^.5
+		<dd>- prevented multiple launch windows from opening after image export
+		<dd>- enabled HTML export
+		<dd>- created summary view button
+</dl>
+
+
+
+<h2>Suggested Features</h2>
+<ul>
+<li>.npy files should have header information describing units, start/stop time, etc. so this information doesn't have to be stored in the file name.
+<br><br>
+<li>sweeps should be displayed starting at 19:00 (whatever the start time was) rather than 0:00.
+<br><br>
+<li>Excel output time format should be 12:00:00 and 12:06:00 rather than 12.00 and 12.10
+<br><br>
+</ul>
+
+
+
+</body></html>
