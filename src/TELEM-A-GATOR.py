@@ -158,7 +158,7 @@ def populateFromScheme(lookForAnimals=False):
     if lookForAnimals==True or TG.scheme["location"] <> str(uimain.lineLocation.text()):
         TG.debug("updaing LOCATION and repopulating fields")
         #TG.scheme["input"]=str(uimain.lineInputFolder.text())
-        uimain.lineLocation.setText(TG.scheme["location"])
+        uimain.lineLocation.setText(os.path.abspath(TG.scheme["location"]))
         TG.animals,TG.features=TG.listAvailable()    
 
         uimain.listAnimals.clear()
@@ -175,7 +175,7 @@ def populateFromScheme(lookForAnimals=False):
     uimain.progConvertAnimal.setValue(0)
     uimain.progConvertAnimal.setMaximum(len(TG.animals))
     
-    uimain.lineInputFolder.setText(TG.scheme["input"])
+    uimain.lineInputFolder.setText(os.path.abspath(TG.scheme["input"]))
     
     if os.path.exists(TG.scheme["input"]):
         nfiles=len(glob.glob(TG.scheme["input"]+"/*.txt"))
