@@ -12,7 +12,7 @@ The Telem-A-Gator is python-based GUI to view and analyze scientific telemetry d
     * `EPOCH` = the date of the first line of data in the file ([epoch time](https://en.wikipedia.org/wiki/Epoch_(reference_date)))
     * `even` = ? I can't remember. Evenly spaced data maybe?
 * This software uses _schemes_ to define an experiment.
-  * A scheme is like "compare the [systolic pressure and heart rate] of animals [A, B, C] against animals [D, E, F] over dates [startDate - endDate] subtracting-out a baseline date range [startDate - endDate] and shuffle the data into [15 minute] bins and report error as [standard deviation].
+  * A scheme is like "compare the average [systolic pressure and heart rate] of animals [A, B, C] at different times of the day from dates [startDate - endDate] subtracting-out a baseline date range [startDate - endDate] and shuffle the data into [15 minute] bins and report error as [standard deviation].
   * A scheme can be saved (or loaded) as an INI file.
   * An example is [scheme_default.ini](src/scheme_default.ini)
   * A scheme can be saved, then loaded and re-run at a later date. This is useful when new data becomes available (the only element that changes is the date range)
@@ -50,6 +50,15 @@ _Run through this set of steps to demonstrate how this software runs_
   * If no animals show up, go back to the data conversion screen and set the data folder
   * Design your experiment here. TODO: document what all the boxes do.
 
+### Screenshots
+description|screenshot
+---|---
+The data path configuration screen lets to convert the raw telemetry files from text file format to NPY format (much faster to load from disk into memory) | ![](doc/screenshots/data_pth_configuration.png)
+The experimental design screen lets you define animal groups, date ranges, etc. This is the scheme designer and editor. All data here can be saved as a scheme and loaded again in the future. | ![](doc/screenshots/experimental_design.png)
+The data summary window launches if you click the button on the lower right of the experimental design screen. It shows you the date ranges of all data available for each window. It also shows you the baseline ane experiment region currently set. It's a good way to see what animals' data is available when, and also provide a sanity check for the date ranges you want to analyze. | ![](doc/screenshots/data_summary.png)
+There are many forms of graphical output. The best way to see them is to play with the software. This is the data output screen. The graph window is small, but can be opened in a larger resizable window. Also, since all the data can be exported in various formats, visualizing it inside the program isn't very important. | ![](doc/screenshots/data_analysis.png)
+When exporting as PNG, image files are stored in the output folder. The _intent_ of this program is to use graphs like these to get an idea if your experiment worked. If it did, use the _data_ in the output folder (CSVs) to create graphs like this in your favorite graphing program. These PNG and JPG images are never intended to be published directly. | ![](doc/screenshots/output.png)
+
 ### Miscellaneous
 * **Licensing:** At one point long ago there was talk about providing Telem-A-Gator with CJFLab software (which Dr. Frazier wrote and distributes as pay-for software with a licensing system to protect it). I included licensing support inside Telem-A-Gator but it is not activated and can be effectively ignored for now. Licensing a collection of plain text python scripts is a weird concept to me. I think the plan was to have this program run as a combination of Python and C such that the licensing system would use that already available in C.
 * **matplotlibwidget error** (if occurs) can be prevented by placing matplotlibwidget.py in to WinPython's ./lib/site-packages/ folder. Alternatively just make sure that file is in the same folder you are launching python from (i.e., the folder with the batch script).
@@ -85,3 +94,6 @@ _Run through this set of steps to demonstrate how this software runs_
 120,24.191,129.820,117.820,745.614,105.741,12.000
 130,26.345,133.677,121.262,755.374,107.194,24.000
 ```
+
+##### Oh yeah, you must export it like this in the telemetry software:
+![](src/images/exportSettings.png)
