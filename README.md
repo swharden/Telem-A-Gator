@@ -1,5 +1,5 @@
 # Telem-A-Gator
-The Telem-A-Gator is python-based GUI to view and analyze scientific telemetry data. The goal of this software is to facilitate _exploratory data analysis_ rather than create publication figures. Any graph displayed in this software can be exported as PNG, JPG, and HTML files, and its content (the data creating it) can be exported as an excel file.
+**Telem-A-Gator is python-based GUI to view and analyze scientific telemetry data.** The goal of this software is to facilitate _exploratory data analysis_ rather than create publication figures. Any graph displayed in this software can be exported as PNG, JPG, and HTML files, and its content (the data creating it) can be exported as an excel file.
 
 ### Concepts
 * The telemetry software outputs data in the form of massive text files (CSV format with .txt extension). Sample output is below.
