@@ -5,13 +5,6 @@
 * This software is intentionally small. It was intended to be run on the laptop in the animal facility which records the telemtry data. This computer has a relatively small screen.
 * The telemetry software outputs data in the form of massive text files (CSV format with .txt extension). Sample output is below.
 * The raw text files are hundreds of megabytes in size. They are extremely slow to parse, especially over network drives. To speed up analysis time, an initial TXT->NPY conversion is performed. This produces hundreds of smaller NPY files which are already memory-mapped in a format Python can load rapidly. 
-* NPY filename format example: `266307-Pulse Pressure-1353942890-even.npy` 
-  * Each NPY file corresponds to a single feature on a single day
-  * Format code: `ORIGINAL-FEATURE-EPOCH-even.npy` where
-    * `ORIGINAL` = the original filename
-    * `FEATURE` = the type of data it contains (pulled from heater)
-    * `EPOCH` = the date of the first line of data in the file ([epoch time](https://en.wikipedia.org/wiki/Epoch_(reference_date)))
-    * `even` = ? I can't remember. Evenly spaced data maybe?
 * This software uses _schemes_ to define an experiment.
   * A scheme is like "compare the average [systolic pressure and heart rate] of animals [A, B, C] at different times of the day from dates [startDate - endDate] subtracting-out a baseline date range [startDate - endDate] and shuffle the data into [15 minute] bins and report error as [standard deviation].
   * A scheme can be saved (or loaded) as an INI file.
