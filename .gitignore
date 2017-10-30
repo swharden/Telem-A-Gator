@@ -1,9 +1,6 @@
 # Don't upload NPY telemetry data
 .npy
 
-# ignore output folder
-src/output/
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
