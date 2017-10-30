@@ -779,7 +779,7 @@ class TelemSession:
                 # PRIMARY BASELINE
                 axes.plot(d[4],d[5],'b-',label="baseline")
 
-        if self.scheme["plotNormalized"] and d[8]:
+        if self.scheme["plotNormalized"] and d[8].any():
                 # NORMALIZED
                 axes.plot(d[0],d[8],'r-')
 
