@@ -529,7 +529,7 @@ class TelemSession:
                 needed[:]=numpy.nan
                 data=numpy.append(data,needed)
             days=len(data)/float(samplesPerDay)       
-            data=numpy.reshape(data,(days,len(data)/days))
+            data=numpy.reshape(data,(int(days),int(len(data)/days)))
             xs=numpy.arange(0,24.0,24.0/float(len(data[0])))
         else:
             #data=numpy.array([data])
@@ -553,7 +553,7 @@ class TelemSession:
         
     def dataAverage(self,data):
         """Given [[ys],[ys],[ys]] return [avg,err]. If stderr=False, return stdev."""                 
-        if data==None:
+        if data is None or not data.any():
             self.debug("averager got None value",5)
             return [[],[]]
         if len(data)==1:
@@ -762,35 +762,35 @@ class TelemSession:
         d=self.data[key]
         
         if self.scheme["plotSecondary"]==True:
-            if d[3]<>None and self.scheme["plotExperiment"]:
+            if numpy.array(d[3]).any and self.scheme["plotExperiment"]:
                 for yvals in d[3]: 
                     # SECONDARY EXPERIMENTAL
                     axes.plot(d[0],yvals,'g-',alpha=.2)
-            if d[7]<>None and self.scheme["baseline"] and self.scheme["plotBaseline"]:
+            if numpy.array(d[7]).any and self.scheme["baseline"] and self.scheme["plotBaseline"]:
                     for yvals in d[7]:
                         # SECONDARY BASELINE
                         axes.plot(d[4],yvals,'b-',alpha=.2)
 
         if self.scheme["plotPrimary"]==True:
-            if d[1]<>None and self.scheme["plotExperiment"]:    
+            if numpy.array(d[1]).any and self.scheme["plotExperiment"]:    
                 # PRIMARY EXPERIMENTAL
                 axes.plot(d[0],d[1],'g-',label="experiment")
-            if d[5]<>None and self.scheme["baseline"] and self.scheme["plotBaseline"]:   
+            if numpy.array(d[5]).any and self.scheme["baseline"] and self.scheme["plotBaseline"]:   
                 # PRIMARY BASELINE
                 axes.plot(d[4],d[5],'b-',label="baseline")
 
-        if self.scheme["plotNormalized"] and d[8]<>None:
+        if self.scheme["plotNormalized"] and d[8]:
                 # NORMALIZED
                 axes.plot(d[0],d[8],'r-')
 
         if self.scheme["plotErrorBars"]==True:
-            if d[1]<>None and self.scheme["plotExperiment"]:           
+            if numpy.array(d[1]).any and self.scheme["plotExperiment"]:           
                 # EXPERIMENTAL ERROR BARS
                 axes.errorbar(d[0],d[1],yerr=d[2],fmt='g.')
-            if d[5]<>None and self.scheme["baseline"] and self.scheme["plotBaseline"]:            
+            if numpy.array(d[5]).any and self.scheme["baseline"] and self.scheme["plotBaseline"]:            
                 # BASELINE ERROR BARS
                 axes.errorbar(d[4],d[5],yerr=d[6],fmt='b.')
-            if d[8]<>None and self.scheme["plotNormalized"]==True:
+            if numpy.array(d[8]).any and self.scheme["plotNormalized"]==True:
                 # NORMALIZED ERROR BARS
                 axes.errorbar(d[0],d[8],yerr=d[9],fmt='r.')
 
@@ -870,7 +870,7 @@ class TelemSession:
         animals=com2lst(self.scheme["animals"])
 
         rows=3 
-        if sweeps<>None: 
+        if sweeps: 
             rows+=len(sweeps)
         cols = len(avg)
         
@@ -883,7 +883,7 @@ class TelemSession:
         matrix[1,:len(avg)]=avg
         matrix[2,:len(err)]=err
 
-        if sweeps<>None:
+        if sweeps:
             for i in range(len(sweeps)):
                 matrix[3+i,:]=sweeps[i]
 
@@ -893,7 +893,7 @@ class TelemSession:
 
         self.debug("saving %s"%(fname))
         out="Time,Average,Error"
-        if sweeps<>None:
+        if sweeps:
             for i in range(len(sweeps)):
                 if len(animals)>1:
                     out+=","+animals[i]
