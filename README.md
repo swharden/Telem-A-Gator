@@ -1,6 +1,12 @@
 # Telem-A-Gator
 **Telem-A-Gator is python-based GUI to view and analyze scientific telemetry data.** The goal of this software is to facilitate _exploratory data analysis_ rather than create publication figures. Any graph displayed in this software can be exported as PNG, JPG, and HTML files, and its content (the data creating it) can be exported as an excel file.
 
+### Screenshots
+
+Flexible Experiment Design | Interactive Analysis | Multiple Output Formats
+---|---|---
+![](doc/screenshots/data_path_configuration.png) ![](doc/screenshots/experimental_design.png) | ![](doc/screenshots/data_summary.png) ![](doc/screenshots/data_analysis.png) | ![](doc/screenshots/html.png) ![](doc/screenshots/output.png)
+
 ### Concepts
 * This software is intentionally small. It was intended to be run on the laptop in the animal facility which records the telemtry data. This computer has a relatively small screen.
 * The telemetry software outputs data in the form of massive text files (CSV format with .txt extension). Sample output is below.
@@ -40,11 +46,12 @@ _Run through this set of steps to demonstrate how this software runs_
   * Go to the _data path configuration_ screen. Instructions are at the top.
   * I like to make my output folder the same as my input folder.
   * Click convert, and hundreds of smaller NPY files will be created.
+  * It may be best to close and re-open the software at this point.
 * ***Experiment Design:***
-  * If no animals show up, go back to the data conversion screen and set the data folder
+  * If no animals show up, go back to the data conversion screen and re-set the data folder
   * Design your experiment here. TODO: document what all the boxes do.
 
-### Screenshots
+### Additional details (per screen)
 description|screenshot
 ---|---
 The data path configuration screen lets to convert the raw telemetry files from text file format to NPY format (much faster to load from disk into memory) | ![](doc/screenshots/data_pth_configuration.png)
